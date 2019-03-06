@@ -25,11 +25,16 @@ namespace ICT713_Lab3_LoganFidler.App_Code
             SqlDataReader dataReader = command.ExecuteReader();
             return dataReader;
         }
-        //[DataObjectMethod(DataObjectMethodType.Update)]
-        //public static int UpdateIncident(Incident original_Incident, Incident incident)
-        //{
-        //    int updateCount = 0;
-        //    string query = "UPDATE "
-        //}
+        [DataObjectMethod(DataObjectMethodType.Update)]
+        public static int UpdateIncident(Incident original_Incident, Incident incident)
+        {
+            int updateCount = 0;
+            string query = "UPDATE Incidents "
+                + "SET DateClosed = @DateClosed, "
+                + "Description = @Description "
+                + "WHERE IncidentID = @original_IncidentID "
+                + "AND DateClosed = @original_DateClosed "
+                + "AND Description = @original_Description";
+        }
     }
 }
