@@ -42,7 +42,14 @@ namespace ICT713_Lab3_LoganFidler.App_Code
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("DateClosed", incident.DateClosed);
+                    if(incident.DateClosed == Convert.ToDateTime("01/01/0001 12:00:00 AM"))
+                    {
+                        command.Parameters.AddWithValue("DateClosed", DBNull.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("DateClosed", incident.DateClosed);
+                    }
                     command.Parameters.AddWithValue("Description", incident.Description);
                     command.Parameters.AddWithValue("original_IncidentID", original_Incident.IncidentID);
                     command.Parameters.AddWithValue("original_DateClosed", original_Incident.DateClosed);
