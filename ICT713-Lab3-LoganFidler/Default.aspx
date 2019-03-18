@@ -11,7 +11,7 @@
         <div>
             <asp:DropDownList ID="ddlTechnicians" runat="server" AutoPostBack="True" DataSourceID="TechnicianDataSource" DataTextField="Name" DataValueField="TechID"></asp:DropDownList>
             <asp:ObjectDataSource ID="TechnicianDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetTechnicians" TypeName="ICT713_Lab3_LoganFidler.App_Code.TechnicianDB"></asp:ObjectDataSource>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="IncidentDataSource">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="IncidentDataSource" OnRowUpdated="GridView1_RowUpdated">
                 <Columns>
                     <asp:BoundField DataField="IncidentID" HeaderText="ID" ReadOnly="True">
                     </asp:BoundField>
@@ -38,7 +38,7 @@
                     </asp:CommandField>
                 </Columns>
             </asp:GridView>
-            <asp:ObjectDataSource ID="IncidentDataSource" runat="server" ConflictDetection="CompareAllValues" DataObjectTypeName="ICT713_Lab3_LoganFidler.App_Code.Incident" OldValuesParameterFormatString="original_{0}" SelectMethod="GetTechIncidents" TypeName="ICT713_Lab3_LoganFidler.App_Code.IncidentDB" UpdateMethod="UpdateIncident">
+            <asp:ObjectDataSource ID="IncidentDataSource" runat="server" ConflictDetection="CompareAllValues" DataObjectTypeName="ICT713_Lab3_LoganFidler.App_Code.Incident" OldValuesParameterFormatString="original_{0}" SelectMethod="GetTechIncidents" TypeName="ICT713_Lab3_LoganFidler.App_Code.IncidentDB" UpdateMethod="UpdateIncident" OnUpdated="IncidentDataSource_Updated">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="ddlTechnicians" Name="TechID" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
@@ -47,6 +47,7 @@
                     <asp:Parameter Name="incident" Type="Object" />
                 </UpdateParameters>
             </asp:ObjectDataSource>
+            <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
         </div>
     </form>
 </body>
