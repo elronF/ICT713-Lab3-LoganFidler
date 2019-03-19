@@ -36,7 +36,12 @@ namespace ICT713_Lab3_LoganFidler.App_Code
                 + "SET DateClosed = @NewDateClosed, "
                 + "Description = @NewDescription "
                 + "WHERE IncidentID = @original_IncidentID "
-                //+ "AND DateClosed = @original_DateClosed " // when the original date is null and trying to update to not null, the DateClosed and Original date don't match...?
+                + "AND ProductCode = @original_ProductCode "
+                + "AND DateOpened = @original_DateOpened "
+                + "AND (DateClosed = @original_DateClosed "
+                +                     "OR DateClosed IS NULL " 
+                +                     "AND @original_DateClosed IS NULL) "
+                + "AND Title = @original_Title "
                 + "AND Description = @original_Description";
             using (SqlConnection connection = new SqlConnection(TechSupportDB.GetConnectionString()))
             {
@@ -52,16 +57,18 @@ namespace ICT713_Lab3_LoganFidler.App_Code
                     }
                     command.Parameters.AddWithValue("NewDescription", incident.Description);
                     command.Parameters.AddWithValue("original_IncidentID", original_Incident.IncidentID);
-                    //command.Parameters.AddWithValue("original_DateClosed", original_Incident.DateClosed); // ORIGINAL CODE
-                    //if (original_Incident.DateClosed == Convert.ToDateTime("0001-01-01 12:00:00 AM")) //UPDATED CODE -neither work well
-                    //{
-                    //    command.Parameters.AddWithValue("original_DateClosed", DBNull.Value);
-                    //}
-                    //else
-                    //{
-                    //    command.Parameters.AddWithValue("original_DateClosed", original_Incident.DateClosed);
-                    //}
-                    command.Parameters.AddWithValue("original_description", original_Incident.Description);
+                    command.Parameters.AddWithValue("original_ProductCode", original_Incident.ProductCode);
+                    command.Parameters.AddWithValue("original_DateOpened", original_Incident.DateOpened);
+                    if (original_Incident.DateClosed == Convert.ToDateTime("0001-01-01 12:00:00 AM")) 
+                    {
+                        command.Parameters.AddWithValue("original_DateClosed", DBNull.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("original_DateClosed", original_Incident.DateClosed);
+                    }
+                    command.Parameters.AddWithValue("original_Title", original_Incident.Title);
+                    command.Parameters.AddWithValue("original_Description", original_Incident.Description);
                     connection.Open();
                     updateRow = command.ExecuteNonQuery();
                 }
