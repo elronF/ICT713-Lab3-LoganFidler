@@ -1,0 +1,16 @@
+﻿body {
+    background-color: lightgray;
+}
+
+header {
+    background-color: darkgrey;
+}
+
+.jumbotron {
+    background-color: #777777;
+    margin-top: 5px;
+}
+
+.grid-control{
+    padding-bottom: 5px;
+}

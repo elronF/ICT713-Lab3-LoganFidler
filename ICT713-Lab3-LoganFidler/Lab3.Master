@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Lab3.master.cs" Inherits="ICT713_Lab3_LoganFidler.Lab3" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Incident Database</title>
+    <link href="content/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/stylesheet.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+<div class="container">
+    <form id="form1" runat="server">
+        <div>
+            <div class="jumbotron text-light">
+                <h1>Incident Database</h1>
+                <p>Choose a tech, any tech.</p>
+            </div>
+            <main>
+                <div class="content">
+                    <asp:ContentPlaceHolder ID="mainPlaceHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </main>
+            <footer>
+                <small>ICT713 Lab 3 - Built with Visual Studio 2017 by Logan Fidler</small>
+            </footer>
+        </div>
+    </form>
+</div>
+</body>
+</html>
